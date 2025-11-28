@@ -1,0 +1,45 @@
+apiVersion: v1 # Versão da API do Kubernetes
+kind: Pod # Tipo do objeto Kubernetes
+metadata: # Metadados do Pod
+  labels: # Rótulos do Pod
+    run: licao # Nome do rótulo
+  name: licao # Nome do Pod
+
+
+spec: # Especificações do Pod
+  containers: # Definição dos contêineres dentro do Pod
+  - image: ubuntu # Imagem do contêiner
+    name: container-1 # Nome do contêiner
+    args: # Argumentos para o comando do contêiner
+    - tail # Comando para manter o contêiner em execução
+    - -f # Argumento do comando tail
+    - /dev/null # Arquivo para o comando tail
+    volumeMounts: # Montagem de volumes no contêiner
+    - name: volume-ubuntu # Nome do volume a ser montado
+      mountPath: /root/volume # Caminho de montagem no contêiner
+    resources: # Recursos alocados para o contêiner
+      limits: # Limites de recursos
+        memory: "128Mi" # Limite de memória
+        cpu: "1" # Limite de CPU
+      requests: # Requisições de recursos
+        memory: "64Mi" # Requisição de memória
+        cpu: "0.4" # Requisição de CPU
+
+  - image: nginx # Imagem do contêiner
+    name: container-2 # Nome do contêiner
+    ports: # Portas expostas pelo contêiner
+    - name: http # Nome da porta
+      containerPort: 80 # Porta do contêiner
+    resources: # Recursos alocados para o contêiner
+      limits: # Limites de recursos
+        memory: "128Mi" # Limite de memória
+        cpu: "0.5" # Limite de CPU
+      requests: # Requisições de recursos
+        memory: "64Mi" # Requisição de memória
+        cpu: "0.3" # Requisição de CPU
+  
+
+  volumes: # Definição dos volumes do Pod
+  - name: volume-ubuntu # Nome do volume
+    emptyDir: # Tipo de volume
+      sizeLimit: 512Mi # Limite de tamanho do volume
