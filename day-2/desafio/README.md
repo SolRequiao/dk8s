@@ -5,6 +5,7 @@ O desafio consiste em executar o pod-faminto em um namespace específico para en
 ## Proposições
 
 1 - Quando o Pod foi morto, qual mecanismo do Linux foi acionado pelo Kubernetes/Container Runtime para parar o processo?
+
 2 - Qual a diferença prática entre definir um request de 100Mi e um limit de 200Mi? O que o Scheduler usa para decidir onde colocar o Pod?
 
 ## Resposta
@@ -15,9 +16,13 @@ Como o Pod está configurado com "restartPolicy: Always", o kubelet detecta que 
 Isso pode ser lido e entendido melhor na documentação do Kubernetes: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle
 
 2 - A diferença prática é que o request é o valor mínimo de recursos que o container precisa para ser criado e agendado. Ou seja, o Scheduler só coloca o Pod em um Node que tenha pelo menos esse valor disponível. Já o limit define o valor máximo de consumo permitido para o container; se ele exceder esse limite, poderá ser finalizado pelo OOMKiller.
+
 O Scheduler usa dois passos para decidir onde colocar o Pod: filtering e scoring.
+
 No filtering (filtragem), ele identifica os Nodes que possuem recursos suficientes e atendem aos requisitos do Pod.
+
 No scoring, ele atribui pontuações aos Nodes viáveis para escolher o mais adequado.
+
 Após esse processo, o kube-scheduler atribui o Pod ao Node mais apropriado. Caso haja pontuações iguais, o kube-scheduler pode escolher aleatoriamente entre os Nodes empatados.
 
 Isso pode ser lido e entendido melhor na documentação do Kubernetes: https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/
@@ -48,3 +53,9 @@ Comando para aplicar os pods:
 Comando para ver a criação do Pod:
 
     kubectl get pods -n treinamento-ch2 -w
+
+## Comandos para deletar recurosos
+
+    kubectl delete -f pod-faminto-resolvido.yaml
+    kubectl delete -f pod-faminto.yaml
+    kubectl delete -f namesapce.yaml 
