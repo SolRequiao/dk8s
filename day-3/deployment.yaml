@@ -1,0 +1,37 @@
+apiVersion: apps/v1 # tipo do objeto
+kind: Deployment # tipo do objeto
+metadata: # metadados do objeto
+  labels: # rótulos do deployment
+    app: nginx-deployment # nome do app
+  name: nginx-deployment # nome do deployment
+  namespace: day-3 # namespace onde o deployment será criado
+
+spec: # especificações do deployment
+  replicas: 5 # número de pods desejados
+  selector: # seletor de pods
+    matchLabels: # rótulos que o deployment irá gerenciar
+      app: nginx-deployment  # rótulo do app
+ 
+  strategy: # estratégia de atualização dos pods
+    #pode ser Recreate ou RollingUpdate
+    #type: Recreate # estratégia de atualização Recreate (para de vez os pods antigos antes de criar os novos)
+    type: RollingUpdate
+    rollingUpdate: # configuração da estratégia RollingUpdate
+      maxSurge: 1 # quantidade de pods extras a serem criados durante a atualização
+      maxUnavailable: 2 # quantidade máxima de pods indisponíveis durante a atualização
+
+  template: # template do pod
+    metadata: # metadados do pod
+      labels: # rótulos do pod
+        app: nginx-deployment # rótulo do app
+    spec: # especificações do pod
+      containers: # containers do pod
+      - image: nginx:1.16.0 # imagem do container
+        name: container-nginx # nome do container
+        resources: # recursos do container
+          limits: # limites de recursos do container
+            cpu: 0.5 # limite de CPU
+            memory: 256Mi # limite de memória
+          requests: # requisições de recursos do container
+            cpu: 0.3 # requisição de CPU
+            memory: 64Mi # requisição de memória
