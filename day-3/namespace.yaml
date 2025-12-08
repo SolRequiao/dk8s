@@ -1,0 +1,4 @@
+apiVersion: v1 # versão da API
+kind: Namespace  # tipo do objeto
+metadata: # metadados do objeto
+  name: day-3 # nome do namespace
