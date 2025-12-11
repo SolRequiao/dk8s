@@ -1,0 +1,31 @@
+# Normalmente nao se usa o replicaset diretamente, mas sim via deployment.
+# Devido a fato do replicaset ser um conceito mais baixo na hierarquia
+# do kubernetes e nao conseguir fazer atualizacoes de forma simples,
+# o deployment é a forma mais comum de gerenciar pods.
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: nginx-app
+  name: nginx-replicaset
+  namespace: day-4
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - image: nginx:1.19.2
+        name: nginx
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 256Mi
+          requests:
+            cpu: 0.25
+            memory: 128Mi
