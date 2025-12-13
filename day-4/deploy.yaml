@@ -1,0 +1,65 @@
+apiVersion: apps/v1 # Especifica a versão da API do Kubernetes
+kind: Deployment # Define o tipo de recurso como Deployment
+metadata: # Metadados do Deployment
+  labels: # Rótulos associados ao Deployment
+    app: deploy # Rótulo chave-valor para identificar o aplicativo
+  name: deploy # Nome do Deployment
+
+spec: # Especificações do Deployment
+  replicas: 5 # Número desejado de réplicas do pod
+  selector: # Seletor para identificar os pods gerenciados por este Deployment
+    matchLabels: # Critérios de correspondência de rótulos
+      app: deploy # Rótulo usado para selecionar os pods
+
+  strategy: # Estratégia de atualização do Deployment
+    rollingUpdate: # Configuração para atualizações contínuas
+      maxSurge: 3 # Número máximo de pods adicionais durante a atualização
+      maxUnavailable: 1 # Número máximo de pods indisponíveis durante a atualização
+    type: RollingUpdate # Tipo de estratégia de atualização
+
+  template: # Template para os pods gerenciados pelo Deployment
+    metadata: # Metadados do pod
+      labels: # Rótulos associados ao pod
+        app: deploy # Rótulo chave-valor para identificar o aplicativo
+    spec: # Especificações do pod
+      containers: # Definição dos contêineres no pod
+        - image: nginx # Imagem do contêiner a ser usada
+          name: nginx-deploy # Nome do contêiner
+          ports: # Portas expostas pelo contêiner
+          - name: nginx-port # Nome da porta
+            containerPort: 80 # Porta do contêiner onde o Nginx escuta
+
+          resources: # Recursos alocados para o contêiner
+            limits: # Limites máximos de recursos
+              memory: "128Mi" 
+              cpu: "500m"
+            requests: # Recursos solicitados
+              memory: "64Mi"
+              cpu: "250m"
+
+          startupProbe: # Probe para verificar se o contêiner iniciou corretamente
+            exec: # Comando para verificar o status do Nginx
+              command: # Comando a ser executado
+                - nginx
+                - -v
+            periodSeconds: 3 # Intervalo entre as verificações
+            failureThreshold: 2 # Número de falhas antes de considerar o contêiner não iniciado
+
+          livenessProbe: # Probe para verificar se o contêiner está vivo
+            tcpSocket: # Verificação de socket TCP
+              port: nginx-port # Porta a ser verificada
+            initialDelaySeconds: 15 # Tempo de espera antes de iniciar as verificações
+            periodSeconds: 20 # Intervalo entre as verificações
+            failureThreshold: 3 # Número de falhas antes de considerar o contêiner não saudável
+            successThreshold: 1 # Número de sucessos necessários para considerar o contêiner saudável
+
+          readinessProbe: # Probe para verificar se o contêiner está pronto para receber tráfego
+            httpGet: # Verificação HTTP
+              port: nginx-port # Porta a ser verificada
+              path: / # Caminho a ser acessado para a verificação
+            initialDelaySeconds: 15 # Tempo de espera antes de iniciar as verificações
+            periodSeconds: 5 # Intervalo entre as verificações
+            failureThreshold: 4 # Número de falhas antes de considerar o contêiner não pronto
+            successThreshold: 2 # Número de sucessos necessários para considerar o contêiner pronto
+
+      restartPolicy: Always # Política de reinício do pod
