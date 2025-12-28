@@ -1,0 +1,18 @@
+apiVersion: v1 # Versao da API
+kind: PersistentVolume # PersistentVolume é um pedaço de armazenamento no cluster que foi provisionado por um administrador
+                        # ou dinamicamente provisionado usando Storage Classes.
+metadata: # Metadados do objeto
+  name: pv-nfs # Nome do PersistentVolume
+  labels: # Rótulos
+    storage: nfs # Tipo do volume
+
+spec: # Especificações do PersistentVolume
+  capacity: # Capacidade do volume
+    storage: 1Gi # Tamanho do volume
+  accessModes: # Modos de acesso
+  - ReadWriteOnce # Este volume pode ser montado como leitura e escrita por muitos nodes
+  persistentVolumeReclaimPolicy: Retain # Delete or Recycle # Politica de Retencao
+  nfs: # Configuração do NFS
+    server: IP # Endereço do servidor NFS
+    path: /path/nfs # Caminho do volume no servidor NFS
+  storageClassName: storage-class # Nome do StorageClass associado
