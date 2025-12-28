@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1 # Versao da API
+kind: StorageClass # StorageClass é um recurso que fornece uma maneira de descrever os "tipos" de armazenamento oferecidos.
+metadata: # Metadados do objeto
+ name: storage-class # Nome do StorageClass
+provisioner: kubernetes.io/no-provisioner # Provisonador
+reclaimPolicy: Retain # Delete ou Recycle # Politica de Retencao
+volumeBindingMode: WaitForFirstConsumer # Modo de vinculacao do volume
