@@ -1,0 +1,19 @@
+apiVersion: v1 # Versao da API
+kind: PersistentVolume # PersistentVolume é um pedaço de armazenamento no cluster que foi provisionado por um administrador
+                        # ou dinamicamente provisionado usando Storage Classes.
+metadata: # Metadados do objeto
+  name: pv # Nome do PersistentVolume
+  labels: # Rótulos
+    storage: local # Tipo do volume
+
+spec: # Especificações do PersistentVolume
+  capacity: # Capacidade do volume
+    storage: 1Gi # Tamanho do volume
+  accessModes: # Modos de acesso
+  #- ReadOnlyMany # Este volume pode ser montado como somente leitura por muitos nodes
+  #- ReadWriteMany # Este volume pode ser montado como leitura e escrita por muitos nodes
+  - ReadWriteOnce # Este volume pode ser montado como leitura e escrita por um único node
+  persistentVolumeReclaimPolicy: Retain # Delete or Recycle # Politica de Retencao
+  hostPath: # Caminho no node
+    path: /path/local # Caminho do volume no node 
+  storageClassName: storage-class # Nome do StorageClass associado
