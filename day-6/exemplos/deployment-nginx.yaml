@@ -1,0 +1,31 @@
+apiVersion: apps/v1 # Versao da API
+kind: Deployment # Tipo do objeto
+metadata: # Metadados do objeto
+  labels: # Rótulos
+    app: nginx # Nome da aplicação
+  name: nginx # Nome do Deployment
+
+spec: # Especificações do Deployment
+  replicas: 1 # Número de réplicas
+  selector: # Seletor de rótulos
+    matchLabels: # Rótulos correspondentes
+      app: nginx # Nome da aplicação
+  template: # Template do Pod
+    metadata: # Metadados do Pod
+      labels: # Rótulos
+        app: nginx # Nome da aplicação
+    
+    spec: # Especificações do Pod
+      containers: # Contêineres do Pod
+      - image: nginx # Imagem do contêiner
+        name: nginx # Nome do contêiner
+        ports: # Portas do contêiner
+        - containerPort: 80 # Porta do Nginx
+        volumeMounts: # Montagens de volume
+        - name: nginx-storage # Nome do volume
+          mountPath: /usr/share/nginx/html # Caminho de montagem no contêiner
+      
+      volumes: # Volumes do Pod
+      - name: nginx-storage # Nome do volume no Pod
+        persistentVolumeClaim: # Referência ao PersistentVolumeClaim
+          claimName: pvc # Nome do PersistentVolumeClaim

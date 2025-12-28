@@ -1,0 +1,31 @@
+apiVersion: apps/v1 # Versao da API
+kind: Deployment # Tipo do objeto
+metadata: # Metadados do objeto
+  labels: # Rótulos
+    app: redis # Nome da aplicação
+  name: redis # Nome do Deployment
+
+spec: # Especificações do Deployment
+  replicas: 1 # Número de réplicas
+  selector: # Seletor de rótulos
+    matchLabels: # Rótulos correspondentes
+      app: redis # Nome da aplicação
+
+  template: # Template do Pod
+    metadata: # Metadados do Pod
+      labels: # Rótulos
+        app: redis # Nome da aplicação
+    spec: # Especificações do Pod
+      containers: # Contêineres do Pod
+      - image: redis # Imagem do contêiner
+        name: redis # Nome do contêiner
+        ports: # Portas do contêiner
+        - containerPort: 6379 # Porta do Redis
+        volumeMounts: # Montagens de volume
+        - mountPath: /data # Caminho de montagem no contêiner
+          name: redis-data # Nome do volume
+      
+      volumes: # Volumes do Pod
+      - name: redis-data # Nome do volume no Pod
+        persistentVolumeClaim: # Referência ao PersistentVolumeClaim
+          claimName: pvc # Nome do PersistentVolumeClaim
