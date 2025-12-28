@@ -1,0 +1,17 @@
+apiVersion: v1 # Versao da API
+kind: PersistentVolumeClaim # Volume Persistente Claim é um pedido de armazenamento por um usuário
+metadata: # Metadados do objeto
+  labels: # Rótulos
+    pvc: pvc # Nome do PersistentVolumeClaim
+  name: pvc # Nome do PersistentVolumeClaim
+
+spec: # Especificações do PersistentVolumeClaim
+  accessModes: 
+  - ReadWriteOnce
+  resources: # Requisitos de recursos
+    requests: # Requisições de recursos
+      storage: 1Gi # Tamanho do volume
+  storageClassName: storage-class # Nome do StorageClass associado
+  selector: # Seletor de rótulos
+    matchLabels: # Rótulos correspondentes
+      storage: nfs # Tipo do volume
