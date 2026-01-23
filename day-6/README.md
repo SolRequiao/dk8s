@@ -2,6 +2,9 @@
 
 Nesta etapa do treinamento, o estudo é focado em **volumes e armazenamento no Kubernetes**, abordando os principais objetos responsáveis por prover persistência de dados para aplicações.
 
+Para melhor entendimento consultar a doc oficial do k8s:
+- https://kubernetes.io/docs/concepts/storage/storage-classes/
+- https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 
 ## StorageClass
 
@@ -9,7 +12,6 @@ O **StorageClass** é um objeto do Kubernetes que descreve e define diferentes *
 Ele permite abstrair os detalhes de provisionamento de storage, possibilitando a criação dinâmica de volumes de acordo com o tipo de armazenamento configurado.
 
 Com o uso de StorageClasses, o administrador pode oferecer diferentes níveis de performance, custo e características de armazenamento para as aplicações.
-
 
 ## Persistent Volume (PV)
 

@@ -1,5 +1,11 @@
 # Day-4
 
+Para melhor entendimento consultar a doc oficial do k8s:
+- https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+- https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+- https://kubernetes.io/pt-br/docs/concepts/workloads/controllers/replicaset/
+
 ## Deployment
 O Deployment gerencia o ciclo de vida das aplicações, garantindo atualizações controladas, rollback e o gerenciamento de réplicas por meio de ReplicaSets.
 
