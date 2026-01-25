@@ -1,0 +1,10 @@
+apiVersion: v1 # Especifica a versão da API do Kubernetes
+kind: Pod # Define o tipo do objeto como Pod
+metadata: # Metadados do Pod
+  name: private-docker-pod # Nome do Pod
+spec: # Especificações do Pod
+  containers: # Definição dos containers dentro do Pod
+    - name: private-docker-container # Nome do container
+      image: <IMaGE_NAME/PRIVATE_REGISTRY> # Imagem do container de um registro privado
+  imagePullSecrets: # Segredos para autenticação em registros privados
+    - name: dockerhub-secret # Nome do segredo criado para acessar o registro privado
