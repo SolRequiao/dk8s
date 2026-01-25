@@ -1,0 +1,21 @@
+apiVersion: v1 # ConfigMap para configurar o NGINX com TLS
+data: # Conteúdo do arquivo de configuração do NGINX
+  nginx.conf: |-
+    events {}
+
+    http {
+        server{
+            listen 80;
+            listen 443 ssl;
+            ssl_certificate /etc/nginx/ssl/certificado.crt;
+            ssl_certificate_key /etc/nginx/ssl/chave-privada.key;
+
+            location / {
+                return 200 'Hello, World!';
+                add_header Content-Type text/plain;
+            }
+        }
+    }
+kind: ConfigMap # Definição do ConfigMap
+metadata: # Metadados do ConfigMap
+  name: cm-web-tls # Nome do ConfigMap
