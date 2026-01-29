@@ -1,0 +1,12 @@
+apiVersion: v1 # versao da API
+kind: Service # tipo do objeto
+metadata: 
+  name: redis-service # nome do service
+spec: # especificacoes do service
+  selector: # seleciona os pods com o label
+    app: redis # label do pod
+  ports: # portas do service
+    - protocol: TCP # protocolo
+      port: 6379 # porta do service
+      targetPort: 6379 # porta do pod
+  type: ClusterIP # tipo do service
