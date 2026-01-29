@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1 # versão da API
+kind: Ingress # tipo do objeto
+metadata: 
+  name: giropops-senhas # nome do Ingress
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: / # anotação para reescrever o caminho
+spec: 
+  rules: # definição das regras do Ingress
+    - http: # configuração HTTP
+        paths: # definição dos caminhos
+        - path: /giropops-senhas # caminho para o serviço
+          pathType: Prefix # tipo do caminho
+          backend: # definição do backend
+            service: # serviço de backend
+              name: giropops-senhas # nome do serviço
+              port: # porta do serviço
+                number: 5000 # número da porta
