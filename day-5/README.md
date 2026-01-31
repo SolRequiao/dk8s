@@ -26,7 +26,7 @@ O cluster foi composto por:
 Foi necessário permitir, no **firewall**, o acesso às seguintes portas:
 
 - TCP 6443
-- TCP 10250–20255
+- TCP 10250–10255
 - TCP 30000–32767
 - TCP 2379–2380
 - TCP 6783
