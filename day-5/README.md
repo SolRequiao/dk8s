@@ -50,16 +50,18 @@ Lembrar de desativar o swap:
 
 Modulos do kernel
 
-    sudo echo "overlay" > /etc/modules-load.d/k8s.conf
-    sudo echo "br_netfilter" >> /etc/modules-load.d/k8s.conf
+    sudo vim /etc/modules-load.d/k8s.conf
+    overlay
+    br_netfilter
     sudo modprobe overlay
     sudo modprobe br_netfilter
 
 Parametros do sistema:
 
-    sudo echo "net.bridge.bridge-nf-call-iptables = 1" > /etc/sysctl.d/k8s.conf
-    sudo echo "net.bridge.bridge-nf-call-ip6tables = 1" >> /etc/sysctl.d/k8s.conf
-    sudo echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/k8s.conf
+    sudo vim /etc/sysctl.d/k8s.conf
+    net.bridge.bridge-nf-call-iptables = 1
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.ipv4.ip_forward = 1
     sudo sysctl --system
 
 Instalando os pacotes:
