@@ -1,0 +1,15 @@
+apiVersion: v1 # versao da API
+kind: Service # tipo do objeto
+metadata: 
+  name: nginx # nome do serviço
+  labels: 
+    app: nginx # rótulo do serviço
+spec: 
+  selector: # seletor para associar o serviço aos pods
+    app: nginx # rótulo do pod
+  ports: # definição das portas do serviço
+    - protocol: TCP # protocolo utilizado
+      port: 80 # porta do serviço
+      targetPort: 80 # porta do contêiner
+      name: tcp-app # nome da porta
+  type: ClusterIP # tipo do serviço

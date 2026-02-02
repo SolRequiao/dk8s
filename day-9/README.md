@@ -25,6 +25,13 @@ Para desinstalar basta usar o delete.
 
 ## Comandos
 
+    kubectl apply -f .
+    kubectl get ingress
+    kubectl get pods
+    kubectl get service
+    kubectl describe ingress
+    kubectl delete -f .
+
 Configuracao do Kind (importante estar no diretorio com o arquivo de config):
 
     kind create cluster --config template.yaml --name nome
