@@ -16,9 +16,9 @@ Extra sobre Ingress Nginx Controller:
 ## Ingress
 Ingress faz o controle do acesso externo para os servicos dentro do cluster.
 
-## Instalando o Ingress Nginx Controller
+## Instalando o Ingress Nginx Controller (no kind)
 
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.14.1/deploy/static/provider/kind/deploy.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
 Para desinstalar basta usar o delete.
 
