@@ -1,0 +1,33 @@
+# -- MUITO IMPORTANTE --
+# ESTE MANIFESTO SÓ FOI ALTERADO E CONFIGURADO PENSANDO EM TESTES EM VMs LOCAIS
+# 
+# Antes de modificar esse manifesto lembre-se fazer uma copia desse arquivo
+# 
+#
+# >> LEMBRETES
+# Manter o macaddresses igual o ja existente para evitar conflitos
+# Colar a palca de rede em modo Bridge
+# Dica: primeiro lembre-se de usar o comando 'ip addr show'
+# para verificar o ip que usado a VM instacia, utilize o mesmo padrao
+#
+# Para finalizar teste antes de aplicar as modificacoes com os comandos
+#
+# sudo netplan try (para testar)
+# sudo netplan apply (se estiver tudo correto)
+
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      dhcp6: false
+      match:
+        macaddress: # Mantenha o mesmo macaddress que vem neste manifesto
+      set-name: enp0s3
+      addresses:
+        - 192.168.x.x/16
+      gateway4: 192.168.0.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 1.1.1.1
+  version: 2

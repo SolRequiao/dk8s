@@ -1,4 +1,4 @@
-# Day-8
+# Day-9
 Esta etapa o foco será o Ingress, neste caso os exemplos seram com o **Ingress Nginx Controller**.
 No entando este Controller não terá (ou não tem mais) suporte, O subistituto para ele é o **Gateway API**.
 Futuramente seram adicionados exemplos com o **Gateway API**.
@@ -16,9 +16,9 @@ Extra sobre Ingress Nginx Controller:
 ## Ingress
 Ingress faz o controle do acesso externo para os servicos dentro do cluster.
 
-## Instalando o Ingress Nginx Controller
+## Instalando o Ingress Nginx Controller (no kind)
 
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.14.1/deploy/static/provider/kind/deploy.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 
 Para desinstalar basta usar o delete.
 
