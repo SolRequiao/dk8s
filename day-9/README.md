@@ -1,4 +1,4 @@
-# Day-8
+# Day-9
 Esta etapa o foco será o Ingress, neste caso os exemplos seram com o **Ingress Nginx Controller**.
 No entando este Controller não terá (ou não tem mais) suporte, O subistituto para ele é o **Gateway API**.
 Futuramente seram adicionados exemplos com o **Gateway API**.
